@@ -1,4 +1,4 @@
-```python
+
 import os
 import json
 import streamlit as st
@@ -279,4 +279,3 @@ else:
 # ---------------- FOOTER ----------------
 st.divider()
 st.caption("Built with Streamlit • LangChain • Groq • Pydantic")
-```
