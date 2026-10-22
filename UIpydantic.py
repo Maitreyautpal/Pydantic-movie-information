@@ -1,4 +1,4 @@
-
+```python
 import os
 import json
 import streamlit as st
@@ -127,7 +127,8 @@ def get_model():
 
     if not api_key:
         raise ValueError(
-            "GROQ_API_KEY nahi mili. .env file ya Streamlit secrets mein set karo."
+            "GROQ_API_KEY was not found. Please configure it in your "
+            ".env file or Streamlit secrets."
         )
 
     return ChatGroq(
@@ -147,20 +148,20 @@ st.markdown("""
 
 st.subheader("🔍 Analyze a Movie")
 st.write(
-    "Movie ke baare mein paragraph paste karo. AI available information "
-    "ko structured movie details mein convert karega."
+    "Paste a paragraph about a movie, and AI will convert the available "
+    "information into structured movie details."
 )
 
 # ---------------- INPUT ----------------
 with st.container(border=True):
     paragraph = st.text_area(
-        "Movie paragraph",
+        "Movie Paragraph",
         height=180,
         placeholder=(
             "Example: Inception is a science fiction film directed by "
             "Christopher Nolan and released in 2010..."
         ),
-        help="Movie ki story ya description English mein paste kar sakte ho."
+        help="Enter a movie description or summary in English."
     )
 
     col1, col2 = st.columns([1, 4])
@@ -185,11 +186,11 @@ if clear:
 # ---------------- ANALYSIS ----------------
 if analyze:
     if not paragraph.strip():
-        st.warning("Pehle movie paragraph enter karo.")
+        st.warning("Please enter a movie paragraph before proceeding.")
 
     else:
         try:
-            with st.spinner("🎬 AI movie details extract kar raha hai..."):
+            with st.spinner("🎬 Extracting movie details using AI..."):
                 model = get_model()
 
                 final_prompt = prompt.invoke({
@@ -203,7 +204,7 @@ if analyze:
                 st.session_state["movie_result"] = movie_data.model_dump()
 
         except Exception as e:
-            st.error("Movie analysis complete nahi ho paya.")
+            st.error("Unable to complete the movie analysis.")
             st.caption(f"Error: {str(e)}")
 
 # ---------------- RESULTS ----------------
@@ -273,8 +274,9 @@ if result:
         )
 
 else:
-    st.info("After submitting the paragraph result will be show here.")
+    st.info("Submit a movie paragraph to view the extracted results here.")
 
 # ---------------- FOOTER ----------------
 st.divider()
 st.caption("Built with Streamlit • LangChain • Groq • Pydantic")
+```
