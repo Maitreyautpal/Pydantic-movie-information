@@ -1,3 +1,5 @@
+# Live Demo : https://pydantic-movie-information-nhm3kn7n3dxs9esrmggc3d.streamlit.app/
+
 # Pydantic Movie Information
 
 An AI-powered movie information extraction app built using Streamlit, LangChain, Groq, and Pydantic.
